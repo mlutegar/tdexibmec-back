@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from backend.models import Palestrante, Pontuacao
+
+admin.site.register(Palestrante)
+admin.site.register(Pontuacao)
