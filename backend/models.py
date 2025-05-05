@@ -8,8 +8,16 @@ class Palestrante(models.Model):
         return self.nome
 
 
+class Espectador(models.Model):
+    nome = models.CharField(max_length=50)
+    avatar = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nome
+
+
 class Pontuacao(models.Model):
-    espectador = models.CharField(max_length=50)
+    espectador = models.ForeignKey(Espectador, on_delete=models.CASCADE)
     palestrante = models.ForeignKey(Palestrante, on_delete=models.CASCADE)
     score = models.PositiveIntegerField()
     updated_at = models.DateTimeField(auto_now=True)

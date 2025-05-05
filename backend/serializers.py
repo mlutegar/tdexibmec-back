@@ -5,7 +5,7 @@ from .models import Pontuacao, Palestrante
 class PontuacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pontuacao
-        fields = ('palestrante', 'score')
+        fields = ('espectador', 'palestrante', 'score')
 
 
 class PalestranteSerializer(serializers.ModelSerializer):

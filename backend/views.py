@@ -1,5 +1,6 @@
 from django.db.models import Sum, Window, F
 from django.db.models.functions import RowNumber
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -10,6 +11,7 @@ from .serializers import PontuacaoSerializer
 class PontuacaoCreateUpdateAPIView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @swagger_auto_schema(request_body=PontuacaoSerializer)
     def post(self, request):
         espectador = request.data.get('espectador')
         palestrante_id = request.data.get('palestrante')
@@ -62,9 +64,10 @@ class SpeakerRankingAPIView(APIView):
             ))
         data = [
             {
-                'espectador': p.espectador,
+                'espectador': p.espectador.nome,
                 'score': p.score,
-                'rank': p.rank
+                'rank': p.rank,
+                'avatar': p.espectador.avatar,
             } for p in qs
         ]
         return Response(data)
